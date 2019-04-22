@@ -50,4 +50,5 @@
 *.ilk
 *.filters
 *.user
+*.opendb
 
