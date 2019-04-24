@@ -36,15 +36,15 @@ char GameController::getGameMatrixCharacter(int row, int column) {
 	return this->gameMatrix[row][column];
 }
 
+// Get winner character
+char GameController::getWinnerCharacter() {
+	return this->winnerCharacter;
+}
+
 // Set function
 void GameController::setGameMatrix(int row, int column, char c) {
 	if (c == 'X' || c == 'O')
 		this->gameMatrix[row][column] = c;
-}
-
-// Get function
-char GameController::getWinnerCharacter() {
-	return this->winnerCharacter;
 }
 
 // Print function
@@ -73,11 +73,11 @@ bool GameController::isGameOver() {
 	// Column check
 	for (int i = 0; i < 3; i++) {
 		// Row's first column is not empty --> could be full row
-		if (currentGameMatrix[i][1] != '\0') {
+		if (currentGameMatrix[i][0] != '\0') {
 			// Check row's all characters are equal or not
-			if (currentGameMatrix[i][1] == currentGameMatrix[i][2] &&
-				currentGameMatrix[i][2] == currentGameMatrix[i][3]) {
-				this->winnerCharacter = currentGameMatrix[i][1];
+			if (currentGameMatrix[i][0] == currentGameMatrix[i][1] &&
+				currentGameMatrix[i][1] == currentGameMatrix[i][2]) {
+				this->winnerCharacter = currentGameMatrix[i][0];
 				return true;
 			}
 		}
@@ -88,11 +88,11 @@ bool GameController::isGameOver() {
 	// Row check
 	for (int j = 0; j < 3; j++) {
 		// Column's first row is not empty --> could be full column
-		if (currentGameMatrix[1][j] != '\0') {
+		if (currentGameMatrix[0][j] != '\0') {
 			// Check column's all characters are equal or not
-			if (currentGameMatrix[1][j] == currentGameMatrix[2][j] &&
-				currentGameMatrix[2][j] == currentGameMatrix[3][j]) {
-				this->winnerCharacter = currentGameMatrix[1][j];
+			if (currentGameMatrix[0][j] == currentGameMatrix[1][j] &&
+				currentGameMatrix[1][j] == currentGameMatrix[2][j]) {
+				this->winnerCharacter = currentGameMatrix[0][j];
 				return true;
 			}
 		}
@@ -101,19 +101,19 @@ bool GameController::isGameOver() {
 	}
 
 	// Diagonal check
-	if (currentGameMatrix[1][1] != '\0') {
+	if (currentGameMatrix[0][0] != '\0') {
 		// 1-1, 2-2, 3-3 check
-		if (currentGameMatrix[1][1] == currentGameMatrix[2][2] &&
-			currentGameMatrix[2][2] == currentGameMatrix[3][3]) {
-			this->winnerCharacter = currentGameMatrix[1][1];
+		if (currentGameMatrix[0][0] == currentGameMatrix[1][1] &&
+			currentGameMatrix[1][1] == currentGameMatrix[2][2]) {
+			this->winnerCharacter = currentGameMatrix[0][0];
 			return true;
 		}
 	}
-	else if (currentGameMatrix[1][3] != '\0') {
+	else if (currentGameMatrix[0][2] != '\0') {
 		// 3-1, 2-2, 1-3 check
-		if (currentGameMatrix[3][1] == currentGameMatrix[2][2] &&
-			currentGameMatrix[2][2] == currentGameMatrix[1][3]) {
-			this->winnerCharacter = currentGameMatrix[3][1];
+		if (currentGameMatrix[2][0] == currentGameMatrix[1][1] &&
+			currentGameMatrix[1][1] == currentGameMatrix[0][2]) {
+			this->winnerCharacter = currentGameMatrix[2][0];
 			return true;
 		}
 	}

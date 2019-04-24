@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include "Start.h"
+#include "End.h"
 #include "Characters.h"
 #include "GameController.h"
 
@@ -60,7 +61,6 @@ int main() {
 			// Already fulled with other charcter check
 			if (gameController->getGameMatrixCharacter(userInputRow, userInputColumn) == '\0') {
 				gameController->setGameMatrix(userInputRow, userInputColumn, userGameCharacter);
-			
 
 				// ---------- Printing ----------
 
@@ -182,6 +182,14 @@ int main() {
 
 				// Reset row counter at the end of the each print operation for (i)
 				gameRowCounter = 0;
+
+				// Game Over check
+				if (gameController->isGameOver()) {
+					EndPage endPage;
+					cout << endPage.getGameOver() << endl << endl;
+					cout << "Winner: " << gameController->getWinnerCharacter() << endl;
+					break;
+				}
 		
 			} else
 			 cout << "This cell is already full. Please try another one." << endl;
@@ -191,5 +199,6 @@ int main() {
 		 cout << "Please enter between 1 and 3." << endl;
 	}
 
+	cin >> userInput;
 	return 0;
 }
